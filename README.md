@@ -1,4 +1,4 @@
-friends
+Projects for friends written over the years.
 =======
 
-friends
+Mostly simple C and C++ stuff.
