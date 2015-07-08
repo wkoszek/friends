@@ -1,5 +1,6 @@
 /* Tutaj jest wszystko */
 #include <stdio.h>
+#include <string.h>
 
 /* 
  * Tutaj mam zdefiniowane miêdzy innymi EXIT_FAILURE, EXIT_SUCCESS,
@@ -48,7 +49,7 @@ main(int argc, char **argv)
 		/*
 		 * Wychodzê z programu z kodem b³êdu w przypadku problemu
 		 */
-		fprintf(stderr, "Nie mogê otworzyæ pliku %s: %s\n", PLIK, strerror(errno));
+		fprintf(stderr, "Nie moge otworzyc pliku %s: %s\n", PLIK, strerror(errno));
 		exit(EXIT_FAILURE);
 	}
 
@@ -77,7 +78,7 @@ main(int argc, char **argv)
 			/*
 			 * Który obs³ugujê poprzez wyj¶cie z programu.
 			 */
-			fprintf(stderr, "Nie mogê przeczytaæ %d-tej warto¶ci\n", i);
+			fprintf(stderr, "Nie moge przeczytac %d-tej wartosci\n", i);
 			fclose(fp);
 			exit(EXIT_FAILURE);
 		}

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define TBD()	\
 	printf("%s(%d)\n", __func__, __LINE__);

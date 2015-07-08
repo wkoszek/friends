@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cassert>
-#include <conio.h>
+#include <ncurses.h>
 
 using namespace std;
 
@@ -122,6 +122,8 @@ class Robot {
 
 			if (ypos < 0) ypos = 0;
 			if (ypos >= ymax) ypos = ymax - 1;
+
+			return 0;
 		}
 };
 
@@ -208,7 +210,7 @@ class PlanszaXY {
 		 */
 		PlanszaXY(int _x, int _y, Robot *rob)
 		{
-			int xi, yi;
+			int xi;
 
 			assert(_x > 0);
 			x = _x;
@@ -283,9 +285,9 @@ class PlanszaXY {
 
 			gdzie = MENU_GLOWNE;
 	
-			cout << "--- Instrukcja obs³ugi programu ---" << endl;
+			cout << "--- Instrukcja obslugi programu ---" << endl;
 			cout << "'1' - tryb wprowadzania danych" << endl;
-			cout << "'2' - tryb poruszania siê" << endl;
+			cout << "'2' - tryb poruszania sie" << endl;
 			cout << "'3' - tryb inteligentny (jeszcze nie jest dopisany)"
 				<< endl;
 			cout << "'4' - koniec programu" << endl;
@@ -300,10 +302,10 @@ class PlanszaXY {
 			int sx, sy, ex, ey;
 
 			cout << "Podaj parametry przeszkody:" << endl;
-			cout << "X pocz¹tkowe: " << endl; cin >> sx;
-			cout << "Y pocz¹tkowe: " << endl; cin >> sy;
-			cout << "X koñcowe: " << endl; cin >> ex;
-			cout << "Y koñcowe: " << endl; cin >> ey;
+			cout << "X poczatkowe: " << endl; cin >> sx;
+			cout << "Y poczatkowe: " << endl; cin >> sy;
+			cout << "X koncowe: " << endl; cin >> ex;
+			cout << "Y koncowe: " << endl; cin >> ey;
 			Przeszkoda_Ustaw(sx, sy, ex, ey);
 			cout << "----------------------" << endl;
 			cout << "Przeszkoda wprowadzona" << endl;
@@ -319,7 +321,7 @@ class PlanszaXY {
 		{
 			gdzie = MENU_PORUSZANIA;
 		
-			cout << "------------------- Jak sterowaæ ----------" << endl;
+			cout << "------------------- Jak sterowac ----------" << endl;
 			cout << UP << "- do gory" << endl;
 			cout << DOWN << "- w dol" << endl;
 			cout << LEFT << "- lewo" << endl;
@@ -352,28 +354,28 @@ class PlanszaXY {
 			 * ze chcemy ustawic przeszkode poza plansza
 			 */
 			if (_sx < 0 || _sx >= x) {
-				cerr << "Z³y X (spoza zakresu 0 i " << x <<
+				cerr << "Zly X (spoza zakresu 0 i " << x <<
 					")";
 				return (-1);
 			}
 			if (_sy < 0 || _sy >= y) {
-				cerr << "Z³y Y (spoza zakresu 0 i " << y <<
+				cerr << "Zly Y (spoza zakresu 0 i " << y <<
 					")";
 				return (-1);
 			}
 			if (_ex < 0 || _ex >= x) {
-				cerr << "Z³y X (spoza zakresu 0 i " << x <<
+				cerr << "Zly X (spoza zakresu 0 i " << x <<
 					")";
 				return (-1);
 			}
 			if (_ey < 0 || _ey >= y) {
-				cerr << "Z³y Y (spoza zakresu 0 i " << y <<
+				cerr << "Zly Y (spoza zakresu 0 i " << y <<
 					")";
 				return (-1);
 			}
 			if (_ex < _sx || _ey < _sy) {
-				cerr << "Koniec przeszkody musi byæ za"
-					"pocz¹tkiem przeszkody" << endl;
+				cerr << "Koniec przeszkody musi byc za"
+					"poczatkiem przeszkody" << endl;
 				return (-1);
 			}
 
@@ -405,6 +407,8 @@ class PlanszaXY {
 			przeszkoda.sy = _sy;
 			przeszkoda.ex = _ex;
 			przeszkoda.ey = _ey;
+
+			return 0;
 		}
 
 		/*
@@ -528,6 +532,8 @@ int
 main(int argc, char **argv)
 {
 	int r;
+
+	initscr();
 
 	/*
 	 * Tworze robota w (0,0) z max. X = 80 i max. Y = 20.

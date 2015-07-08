@@ -13,7 +13,7 @@ main()
 
 	fp = fopen("dane.txt", "r");
 	if (fp == NULL) {
-		fprintf(stderr, "Nie mogê otworzyæ pliku dane.txt");
+		fprintf(stderr, "Can't open file dane.txt");
 		exit(EXIT_FAILURE);
 	}
 	for (i = 0; i < TABSIZE; i++) {
