@@ -62,6 +62,8 @@ main(int argc, char **argv)
 	 */
 	tab_size = sizeof(tab) / sizeof(tab[0]);
 
+	printf("Going to read: %d elements\n", tab_size);
+
 	/*
 	 * Od pierwszego do ostatniego elementu tablicy...
 	 */
@@ -70,7 +72,7 @@ main(int argc, char **argv)
 		 * Spróbuj wczytaæ warto¶æ "float"...
 		 */
 		ret = fscanf(fp, "%f", &tab[i]);
-		
+
 		/* ...które siê udaje, je¿eli ret == 1. W przeciwnym
 		 * wypadku wyst±pi³ jaki¶ b³±d...
 		 */
