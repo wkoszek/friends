@@ -1,7 +1,9 @@
-#include <stdlib.h>
 #include <iostream>
 #include <cassert>
-#include <ncurses.h>
+
+#include <stdlib.h>
+#include <unistd.h>
+#include <termios.h>
 
 using namespace std;
 
@@ -530,12 +532,36 @@ class PlanszaXY {
 };
 
 int
+unix_kbhit_enable(void)
+{
+	struct termios	term, term_old;
+	int	fd;
+
+	fd = STDIN_FILENO;
+
+	if (tcgetattr(fd, &term_old) < 0) {
+		return -1;
+	}
+	term = term_old;
+	term.c_lflag &= ~(ECHO | ICANON | IEXTEN | ISIG);
+	term.c_iflag &= ~(BRKINT | ICRNL | ISTRIP | IXON);
+
+	if (tcsetattr(fd, TCSAFLUSH, &term) < 0) {
+		return -1;
+	}
+	return 0;
+}
+
+int
 main(int argc, char **argv)
 {
 	int r;
 
-	initscr();
-
+	r = unix_kbhit_enable();
+	if (r != 0) {
+		cerr << "Couldn't start raw keyboard mode" << endl;
+		exit(1);
+	}
 	/*
 	 * Tworze robota w (0,0) z max. X = 80 i max. Y = 20.
 	 * Potem tworze plansze o takich samych maksymalnych rozmiarach,
@@ -548,7 +574,7 @@ main(int argc, char **argv)
 	p->Narysuj();
 	p->Menu_Glowne();
 	for (;;) {
-		r = getch();
+		r = getchar();
 		p->Akcja(r);
 	}
 
