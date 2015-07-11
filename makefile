@@ -4,7 +4,7 @@ SRCS_EXCLUDED=
 SRCS=$(filter-out $(SRCS_EXCLUDED),$(SRCS_ALL))
 OBJECTS+=$(SRCS:.c=.pc)
 OBJECTS+=$(SRCS:.cc=.pcpp)
-CFLAGS+=-Wall -pedantic
+CFLAGS+=-Wall -pedantic -g -ggdb
 CXXFLAGS+=$(CFLAGS)
 
 all:	$(OBJECTS)
@@ -15,4 +15,4 @@ all:	$(OBJECTS)
 	$(CXX) $(CXXFLAGS) $< -o $@ -lncurses
 
 clean:
-	rm -rf *.pc *.pcpp
+	rm -rf *.pc *.pcpp *.dSYM
