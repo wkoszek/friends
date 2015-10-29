@@ -17,3 +17,8 @@ Just type:
 
 Each `.c` and `.cc` file will compile to its own program. Just run the
 program to see the result.
+
+# Author
+
+- Wojciech Adam Koszek, [wojciech@koszek.com](mailto:wojciech@koszek.com)
+- [http://www.koszek.com](http://www.koszek.com)
